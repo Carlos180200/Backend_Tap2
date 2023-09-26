@@ -16,6 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('register',[JWTController::class, 'registrer']);
-Route::post('login',[JWTController::class,'login']);
-Route::get('index',[UserController::class,'index']);
+Route::post('register',[JWTController::class, 'registrer'])->name('registrar');
+Route::post('login',[JWTController::class,'login'])->name('login');
+
+
+// Ruta para la verificación de cuenta (fuera del grupo middleware 'jwt.verify')
+Route::get('verificar/{id}', [JWTController::class, 'verificar'])->name('verificar');
+
+
+//proteger rutas
+Route::middleware('jwt.verify')->group(function(){
+    Route::get('index',[UserController::class,'index']);
+});
