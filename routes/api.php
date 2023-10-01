@@ -21,7 +21,12 @@ Route::post('login',[JWTController::class,'login'])->name('login');
 
 
 // Ruta para la verificación de cuenta (fuera del grupo middleware 'jwt.verify')
-Route::get('verificar/{id}', [JWTController::class, 'verificar'])->name('verificar');
+Route::get('verificar/{token}', [JWTController::class, 'verificar'])->name('verificar');
+Route::get('restablecer/{id}', [JWTController::class, 'RestablecerPassword'])->name('restablecer_password');
+Route::get('password/{id}', [JWTController::class, 'RecuperarPassword'])->name('password');
+Route::post('Newpassword/', [JWTController::class, 'ModificarPassword'])->name('new_password');
+Route::post('DestroyUsers/', [JWTController::class, 'destroyUsers'])->name('delete_users');
+
 
 
 //proteger rutas
